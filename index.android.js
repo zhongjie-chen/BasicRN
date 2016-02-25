@@ -12,16 +12,16 @@ import Icons from './asset/Icons'
 import {Router, Route, Schema, Animations, TabBar} from 'react-native-router-flux'
 import Launch from './component/launch'
 import FirstPageComponent from './component/firstPageComponent'
-
+import HomeComponent from './component/HomeComponent'
 class BasicRN extends Component {
   render() {
-         var defaultName = 'FirstPageComponent';
-         var defaultComponent = FirstPageComponent;
+         var defaultName = 'HomeComponent';
+         var defaultComponent = HomeComponent;
          return (
          <Navigator
            initialRoute={{ name: defaultName, component: defaultComponent }}
            configureScene={(route) => {
-             return Navigator.SceneConfigs.VerticalDownSwipeJump;
+             return Navigator.SceneConfigs.HorizontalSwipeJumpFromRight;
            }}
            renderScene={(route, navigator) => {
              let Component = route.component;
