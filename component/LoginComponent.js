@@ -1,6 +1,7 @@
 import React, {
     View,
     Text,
+    TextInput,
     TouchableOpacity,
 } from 'react-native';
 
@@ -27,6 +28,11 @@ class LoginComponent extends React.Component {
       return (
               <View>
                     <Header doBack = {this._pressButton.bind(this)} headerModel = {{'leftIcon':Icons.home,'titleName':'返回主页'}}/>
+                    <TextInput
+                      style={{height: 40, borderColor: 'red', borderWidth: 1}}
+                    //  onChangeText={(text) => this.setState({text})}
+                    //  value={this.state.text}
+                    />
               </View>
       );
     }
