@@ -12,13 +12,10 @@ import React, {
 import FirstPageComponent from './firstPageComponent';
 import Header from './Header';
 import Icons from '../asset/Icons';
+import RequestBuilder from '../http/RequestBuilder';
 
-const REUQST_URL = 'http://192.168.100.61:8003/api/exec/1.htm';
-const APP_KEY = 'ZW5sNWVWOWhibVJ5YjJsaw==';
-const CLIENT_ID  = 1;
 
 class LoginComponent extends React.Component {
-
 
     toQueryString(obj) {
         return obj ? Object.keys(obj).sort().map(function (key) {
@@ -48,27 +45,12 @@ class LoginComponent extends React.Component {
 
     _handlerLogin(){
 
-      let data = JSON.stringify({"D":"00000000-0a30-9893-5d4e-9fca0033c587","T":"1","TX":"U001003","V":"1.0.0","type":1,"password":"bcb15f821479b4d5772bd0ca866c00ad5f926e3580720659cc80d39c9d09802a","login_name":"18868807387"});
-      console.log(data);
-      console.log('login...');
-
-      fetch('http://test.zzzxyy.ucmed.cn/api/exec/1.htm',{
-        method:'POST',
-        headers:{
-          'Accept': 'application/xml',
-          'K': 'ZW5sNWVWOWhibVJ5YjJsaw==',
-          'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-          'Time': '1456816347844'
-        },
-        body:this.toQueryString({
-          'requestData':data
-        })
-      })
-      .then(response => response.json())
-      .then(responseData => {
+      RequestBuilder({"TX":"U001003","password":this.state.password,"login_name":this.state.userName}).then(responseData => {
+        // let array = [1,2,3];
+        // array.map(i => console.log(i));
         console.log(JSON.stringify(responseData));
-      })
-      .done();
+      }).done();
+
     }
 
 
