@@ -20,9 +20,7 @@ class BasicRN extends Component {
          return (
          <Navigator
            initialRoute={{ name: defaultName, component: defaultComponent }}
-           configureScene={(route) => {
-             return Navigator.SceneConfigs.HorizontalSwipeJumpFromRight;
-           }}
+           configureScene={Router.renderScene}
            renderScene={(route, navigator) => {
              let Component = route.component;
              return <Component {...route.params} navigator={navigator} />

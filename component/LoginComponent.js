@@ -13,7 +13,7 @@ import FirstPageComponent from './firstPageComponent';
 import Header from './Header';
 import Icons from '../asset/Icons';
 import RequestBuilder from '../http/RequestBuilder';
-
+import sha256 from 'js-sha256';
 
 class LoginComponent extends React.Component {
 
@@ -45,7 +45,7 @@ class LoginComponent extends React.Component {
 
     _handlerLogin(){
 
-      RequestBuilder({"TX":"U001003","password":this.state.password,"login_name":this.state.userName}).then(responseData => {
+      RequestBuilder({"TX":"U001003","password":sha256(this.state.password),"login_name":this.state.userName}).then(responseData => {
         // let array = [1,2,3];
         // array.map(i => console.log(i));
         console.log(JSON.stringify(responseData));
