@@ -6,6 +6,9 @@ import React, {
     TouchableOpacity,
     TouchableHighlight,
     Switch,
+    ToastAndroid,
+    AsyncStorage,
+    ProgressBarAndroid,
     StyleSheet,
 } from 'react-native';
 
@@ -44,7 +47,10 @@ class LoginComponent extends React.Component {
     }
 
     _handlerLogin(){
-
+      if(!this.state.password || !this.state.userName){
+        ToastAndroid.show('请输入密码跟账号！',ToastAndroid.SHORT);
+        return;
+      }
       RequestBuilder({"TX":"U001003","password":sha256(this.state.password),"login_name":this.state.userName}).then(responseData => {
         // let array = [1,2,3];
         // array.map(i => console.log(i));
@@ -97,6 +103,7 @@ class LoginComponent extends React.Component {
                     <Text style={{marginRight:10,textAlign:'right',color:'blue',fontSize:16}}>
                       忘记密码
                     </Text>
+                    <ProgressBarAndroid  color="red" styleAttr="Inverse" />
               </View>
       );
     }

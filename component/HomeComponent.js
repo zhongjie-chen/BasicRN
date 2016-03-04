@@ -4,10 +4,12 @@ import React,{
     WebView,
     Picker,
     StyleSheet,
+    AsyncStorage,
     TouchableOpacity
 } from 'react-native'
 
 import LoginComponent from './LoginComponent';
+import ArticleComponent from './ArticleComponent';
 
 class HomeComponent extends React.Component {
 
@@ -28,10 +30,23 @@ class HomeComponent extends React.Component {
         })
     }
   }
+  _handlerArticle(e){
+    const { navigator } = this.props;
+
+    if(navigator) {
+        navigator.push({
+            name: 'ArticleComponent',
+            component: ArticleComponent,
+            params:{
+              id:1
+            }
+        })
+    }
+  }
   render() {
     return(
         <View style={styles.container}>
-          <TouchableOpacity style={styles.leftView}>
+          <TouchableOpacity style={styles.leftView} onPress={()=>this._handlerArticle()} >
             <Text>左边</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.middleView}>
