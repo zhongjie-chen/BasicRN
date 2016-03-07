@@ -45,7 +45,7 @@ class LoginComponent extends React.Component {
                     <ViewPagerAndroid style={styles.pageStyle}
                       initialPage={0}>
                       <View style={{justifyContent: 'center',}}>
-                        <ArticleListCmp/>
+                        <ArticleListCmp {...this.props} />
                       </View>
                       <View style={{backgroundColor:'yellow'}}>
                         <ProgressBarAndroid  color="red" styleAttr="Inverse" />
