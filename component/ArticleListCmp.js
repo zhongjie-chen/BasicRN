@@ -37,6 +37,8 @@ class ArticleListCmp extends React.Component {
         if(responseData.R == 200){
           this.setState({isInitLoading:true});
           this.setState({articles:responseData.list});
+          this.setState({pageCount:responseData.page_count})
+          this.setState({pageStart:1})
         }
       }).done();
     }
@@ -72,6 +74,49 @@ class ArticleListCmp extends React.Component {
       </TouchableHighlight>
     );
   }
+  _renderFooter(){
+    if (this.state.pageCount > this.state.pageStart) {
+      return (
+        <View
+          style={{
+            marginVertical: 20,
+            paddingBottom: 20,
+            alignSelf: 'center'
+          }}
+        >
+          <ProgressBarAndroid />
+        </View>
+      )
+    } else {
+      return (
+        <View
+          style={{
+            marginVertical: 20,
+            paddingBottom: 20,
+            alignSelf: 'center'
+          }}
+        >
+          <Text
+            style={{
+              color: 'rgba(0, 0, 0, 0.3)'
+            }}
+          >数据已结加载完了- -|||</Text>
+        </View>
+      );
+    }
+  }
+  _onEndReached(){
+    if (this.state.pageCount > this.state.pageStart) {
+      RequestBuilder({"TX":"Z002004","page_size":20,"class_id":97,"page_no":this.state.pageStart + 1})
+      .then(responseData => {
+        console.log(responseData);
+        if(responseData.R == 200){
+          this.setState({articles:[...this.state.articles, ...responseData.list]});
+          this.setState({pageStart:this.state.pageStart + 1})
+        }
+      }).done();
+    }
+  }
   render() {
     if (!this.state.isInitLoading) {
         return (
@@ -81,6 +126,8 @@ class ArticleListCmp extends React.Component {
       return(
       <View style={styles.container}>
         <ListView
+            renderFooter={this._renderFooter.bind(this)}
+            onEndReached={this._onEndReached.bind(this)}
             dataSource={this.dataSource.cloneWithRows(this.state.articles)}
             renderRow={this._renderRow.bind(this)}
             initialListSize={this.state.count}

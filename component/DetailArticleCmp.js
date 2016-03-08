@@ -1,6 +1,9 @@
 import React, {
     View,
     Text,
+    Image,
+    WebView,
+    ScrollView,
     TouchableOpacity,
 } from 'react-native';
 
@@ -24,9 +27,20 @@ class DetailArticleCmp extends React.Component {
     }
 
     render() {
+      const {rowData} = this.props;
+      let imgHtml = `<img style="width: 100%;height: 45%;" src='${rowData.big_photo}'>${rowData.content}`;
+      console.log(rowData);
       return (
-              <View>
+              <View style={{flex :1}}>
                     <Header doBack = {this._pressButton.bind(this)} headerModel = {{'leftIcon':Icons.back,'titleName':'新闻详情'}}/>
+                    <View style={{flexDirection:'row',padding:8}}>
+                      <Text style = {{fontWeight:'bold',fontSize:20,color:'black',flex:1}}>{rowData.title}</Text>
+                      <Text style={{alignSelf:'flex-end'}}>{rowData.date}</Text>
+                    </View>
+                    <WebView
+                      style={{flex:1}}
+                      html={imgHtml}
+                    />
               </View>
       );
     }
