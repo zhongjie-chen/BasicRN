@@ -44,7 +44,7 @@ class ArticleListCmp extends React.Component {
     }
   }
 
-  _onItemClick(rowData){
+  _onItemClick(rowData,rowID){
     const { navigator } = this.props;
     if(navigator) {
         navigator.push({
@@ -55,11 +55,14 @@ class ArticleListCmp extends React.Component {
             }
         })
     }
+    // let newArticles = this.state.articles;
+    // newArticles[rowID].title = '被我点击了 改变title'
+    // this.setState({articles:newArticles})
   }
 
-  _renderRow(rowData){
+  _renderRow(rowData,sectionID, rowID, highlightRow){
     return(
-      <TouchableHighlight underlayColor="rgba(34, 26, 38, 0.1)" onPress={()=>this._onItemClick(rowData)}>
+      <TouchableHighlight underlayColor="rgba(34, 26, 38, 0.1)" onPress={()=>this._onItemClick(rowData,rowID)}>
         <View style={{flexDirection:'row',padding:12,borderBottomWidth:StyleSheet.hairlineWidth,borderColor:'#c9c9c9'}}>
           <ImageProgress
             source = {{uri: rowData.small_photo}}

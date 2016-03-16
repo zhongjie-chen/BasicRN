@@ -1,6 +1,6 @@
 'use strict'
 
-const REUQEST_URL = 'http://test.zzzxyy.ucmed.cn/api/exec/1.htm';
+const REUQEST_URL = 'http://test.cqdpyy.ucmed.cn/api/exec/1.htm';
 const APP_KEY = 'ZW5sNWVWOWhibVJ5YjJsaw==';
 const REQUEST_TIME = new Date().getTime();
 
@@ -16,7 +16,7 @@ const toQueryString = function (obj) {
     }).join('&') : '';
 }
 
-let data = {"D":"00000000-0a30-9893-5d4e-9fca0033c587","T":"1","V":"1.0.0","type":1};
+let data = {"D":"ffffffff-88ac-cfac-ffff-ffffb7e805c5","T":"1","V":"1.0.0","type":1};
 
 const RequestBuilder = function(params){
   Object.assign(data,params);
