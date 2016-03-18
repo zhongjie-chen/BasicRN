@@ -12,7 +12,7 @@ import React,{
 
 import LoginComponent from './LoginComponent';
 import ArticleComponent from './ArticleComponent';
-
+import MiddleCmp from './MiddleCmp';
 class HomeComponent extends React.Component {
 
   constructor(props) {
@@ -43,6 +43,20 @@ class HomeComponent extends React.Component {
         navigator.push({
             name: 'ArticleComponent',
             component: ArticleComponent,
+            params:{
+              id:1
+            }
+        })
+    }
+  }
+
+  _handlerMiddle(e){
+    const { navigator } = this.props;
+
+    if(navigator) {
+        navigator.push({
+            name: 'MiddleCmp',
+            component: MiddleCmp,
             params:{
               id:1
             }
@@ -101,7 +115,7 @@ class HomeComponent extends React.Component {
             <TouchableOpacity style={styles.leftView} onPress={()=>this._handlerArticle()} >
               <Text>左边</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.middleView}>
+            <TouchableOpacity style={styles.middleView} onPress={()=>this._handlerMiddle()}>
               <Text>中间</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.rightView} onPress={()=>this._handlerLogin()}>
