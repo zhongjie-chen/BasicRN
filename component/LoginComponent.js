@@ -9,8 +9,6 @@ import React, {
     ToastAndroid,
     AsyncStorage,
     ProgressBarAndroid,
-    Animated,
-    PanResponder,
     StyleSheet,
 } from 'react-native';
 
@@ -36,22 +34,7 @@ class LoginComponent extends React.Component {
     }
     constructor(props) {
         super(props);
-        this.state = {
-          pan: new Animated.ValueXY(),
-        };
-        this.state.panResponder = PanResponder.create({
-         onStartShouldSetPanResponder: () => true,
-         onPanResponderMove: Animated.event([null, {
-           dx: this.state.pan.x, // x,y are Animated.Value
-           dy: this.state.pan.y,
-         }]),
-         onPanResponderRelease: () => {
-           Animated.spring(
-             this.state.pan,         // Auto-multiplexed
-             {toValue: {x: 0, y: 0}} // Back to zero
-           ).start();
-         },
-       });
+        this.state = {};
     }
 
     _pressButton() {
@@ -121,10 +104,6 @@ class LoginComponent extends React.Component {
                       忘记密码
                     </Text>
                     <ProgressBarAndroid  color="red" styleAttr="Inverse" />
-
-                    <Animated.View  {...this.state.panResponder.panHandlers} style={[this.state.pan.getLayout(),{marginLeft:20,height:40,width:40,backgroundColor:'red'}]}>
-
-                    </Animated.View>
               </View>
       );
     }
