@@ -120,6 +120,7 @@ class ArticleListCmp extends React.Component {
       }).done();
     }
   }
+
   render() {
     if (!this.state.isInitLoading) {
         return (

@@ -7,6 +7,8 @@ import React,{
     StyleSheet,
     AsyncStorage,
     ViewPagerAndroid,
+    Animated,
+    LayoutAnimation,
     TouchableOpacity
 } from 'react-native'
 
@@ -19,13 +21,16 @@ class HomeComponent extends React.Component {
     super(props);
     this.state={
       pageCount:3,
-      index:0
+      w:10,
+      h:10,
+      index:0,
+      fadeAnim:new Animated.Value(0)
     }
   }
 
   _handlerLogin(e){
     const { navigator } = this.props;
-
+    
     if(navigator) {
         navigator.push({
             name: 'LoginComponent',
@@ -107,7 +112,12 @@ class HomeComponent extends React.Component {
         default:
 
       }
-      //setInterval(()=>this.viewPager.setPage(this.state.index+1),2000);
+      setInterval(()=>{
+        Animated.timing(          // Uses easing functions
+           this.state.fadeAnim,    // The value to drive
+           {toValue: 1},           // Configuration
+         ).start();
+      },1000);
 
     return(
         <View style={{flex:1}}>
@@ -134,6 +144,15 @@ class HomeComponent extends React.Component {
             {docts}
           </View>
 
+          <View style={{backgroundColor:'red',height:this.state.h,width:this.state.w,margin:20}}>
+
+          </View>
+          <Animated.View style={{backgroundColor:'green',flex:1,opacity: this.state.fadeAnim}}>
+            <Animated.Text style={{fontSize:this.state.fadeAnim.interpolate({
+              inputRange:[0,1],
+              outputRange:[10,30]
+            })}}>hahah</Animated.Text>
+          </Animated.View>
         </View>
     );
   }
